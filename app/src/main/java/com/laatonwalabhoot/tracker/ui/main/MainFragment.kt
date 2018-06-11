@@ -9,7 +9,11 @@ import android.view.View
 import android.view.ViewGroup
 import com.laatonwalabhoot.tracker.EventReceiver
 import com.laatonwalabhoot.tracker.R
+import com.laatonwalabhoot.tracker.di.components.DaggerMainFragmentComponent
+import com.laatonwalabhoot.tracker.di.components.MainFragmentComponent
+import com.laatonwalabhoot.tracker.di.modules.LinearLayoutManagerModule
 import kotlinx.android.synthetic.main.fragment_main.*
+import javax.inject.Inject
 
 class MainFragment : Fragment() {
 
@@ -17,9 +21,19 @@ class MainFragment : Fragment() {
         fun newInstance() = MainFragment()
     }
 
-    private lateinit var eventListAdapter: EventListAdapter
-    private lateinit var eventReceiver: EventReceiver
-    private lateinit var intentFilter: IntentFilter
+    private lateinit var component: MainFragmentComponent
+
+    @Inject
+    lateinit var eventListAdapter: EventListAdapter
+
+    @Inject
+    lateinit var eventReceiver: EventReceiver
+
+    @Inject
+    lateinit var intentFilter: IntentFilter
+
+    @Inject
+    lateinit var linearLayoutManager: LinearLayoutManager
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -28,19 +42,20 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        component = DaggerMainFragmentComponent.builder()
+                .linearLayoutManagerModule(LinearLayoutManagerModule(context))
+                .build()
+        component.injectMainFragment(this)
         setAdapter()
         setReceiver()
     }
 
     private fun setAdapter() {
-        eventListAdapter = EventListAdapter()
-        event_list.layoutManager = LinearLayoutManager(context)
+        event_list.layoutManager = linearLayoutManager
         event_list.adapter = eventListAdapter
     }
 
     private fun setReceiver() {
-        eventReceiver = EventReceiver()
-        intentFilter = IntentFilter()
         eventReceiver.setEventListener(eventListAdapter.getListener())
         intentFilter.addAction("android.intent.action.USER_PRESENT")
         intentFilter.addAction("android.intent.action.SCREEN_ON")
