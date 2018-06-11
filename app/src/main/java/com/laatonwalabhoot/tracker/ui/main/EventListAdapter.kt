@@ -31,7 +31,7 @@ class EventListAdapter: RecyclerView.Adapter<EventViewHolder>(), EventListener {
     }
 
     override fun onEvent(event: Event) {
-        eventList?.add(event)
+        eventList?.add(0,event)
         notifyDataSetChanged()
     }
 
