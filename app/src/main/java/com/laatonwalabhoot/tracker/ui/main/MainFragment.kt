@@ -62,4 +62,10 @@ class MainFragment : Fragment() {
         intentFilter.addAction("android.intent.action.SCREEN_OFF")
         activity?.registerReceiver(eventReceiver, intentFilter)
     }
+
+    override fun onDestroy() {
+        activity?.unregisterReceiver(eventReceiver)
+        super.onDestroy()
+    }
+
 }
