@@ -1,6 +1,6 @@
 package com.laatonwalabhoot.tracker.di.modules
 
-import com.laatonwalabhoot.tracker.EventReceiver
+import com.laatonwalabhoot.tracker.data.receivers.EventReceiver
 import com.laatonwalabhoot.tracker.di.scopes.PerFragmentScope
 import dagger.Module
 import dagger.Provides

@@ -4,8 +4,8 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.laatonwalabhoot.tracker.Event
-import com.laatonwalabhoot.tracker.EventListener
+import com.laatonwalabhoot.tracker.data.models.Event
+import com.laatonwalabhoot.tracker.data.receivers.EventListener
 import com.laatonwalabhoot.tracker.R
 import kotlin.collections.ArrayList
 

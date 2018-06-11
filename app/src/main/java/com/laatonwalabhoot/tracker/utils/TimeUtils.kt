@@ -1,4 +1,4 @@
-package com.laatonwalabhoot.tracker
+package com.laatonwalabhoot.tracker.utils
 
 import java.text.SimpleDateFormat
 import java.util.*

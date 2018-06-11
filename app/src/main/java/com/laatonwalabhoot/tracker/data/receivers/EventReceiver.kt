@@ -1,8 +1,10 @@
-package com.laatonwalabhoot.tracker
+package com.laatonwalabhoot.tracker.data.receivers
 
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import com.laatonwalabhoot.tracker.utils.TimeUtils
+import com.laatonwalabhoot.tracker.data.models.Event
 
 class EventReceiver: BroadcastReceiver() {
 

@@ -1,12 +1,10 @@
 package com.laatonwalabhoot.tracker.ui.main
 
-import android.service.autofill.FillEventHistory
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.TextView
-import com.laatonwalabhoot.tracker.Event
+import com.laatonwalabhoot.tracker.data.models.Event
 import com.laatonwalabhoot.tracker.R
-import kotlinx.android.synthetic.main.item_event.view.*
 
 class EventViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 

@@ -1,8 +1,8 @@
-package com.laatonwalabhoot.tracker
+package com.laatonwalabhoot.tracker.ui.main
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import com.laatonwalabhoot.tracker.ui.main.MainFragment
+import com.laatonwalabhoot.tracker.R
 
 class MainActivity : AppCompatActivity() {
 

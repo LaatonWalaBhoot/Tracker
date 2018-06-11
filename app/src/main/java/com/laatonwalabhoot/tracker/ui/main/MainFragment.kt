@@ -7,7 +7,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.laatonwalabhoot.tracker.EventReceiver
+import com.laatonwalabhoot.tracker.data.receivers.EventReceiver
 import com.laatonwalabhoot.tracker.R
 import com.laatonwalabhoot.tracker.di.components.DaggerMainFragmentComponent
 import com.laatonwalabhoot.tracker.di.components.MainFragmentComponent
