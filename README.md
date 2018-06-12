@@ -31,7 +31,7 @@ Future Prospects
 
 Working
 1. The fragment sets the adapter which gets updated on receiving live data from the db
-2. The service gets started along with the fragment on a separate process
+2. The service gets started along with the fragment
 3. The receiver listens for the events and calls the Event Listener which updates the db from the service
 4. The event listener in turn updates the db and each event gets added as soon as it gets called.
 5. The adapter and the receiver work simultaneously in cohesion with the db.
