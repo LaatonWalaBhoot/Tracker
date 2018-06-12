@@ -18,7 +18,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class TrackerService: Service(), EventListener {
+class TrackerService : Service(), EventListener {
 
     private lateinit var component: TrackerServiceComponent
     private val NOTIFICATION_ID = 1001
@@ -44,7 +44,7 @@ class TrackerService: Service(), EventListener {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        if(intent==null) {
+        if (intent == null) {
             return START_NOT_STICKY
         }
         startForeground(NOTIFICATION_ID, notification)

@@ -10,7 +10,7 @@ class EventModule {
 
     @Provides
     @ApplicationScope
-    fun event() : Event {
+    fun event(): Event {
         return Event()
     }
 }

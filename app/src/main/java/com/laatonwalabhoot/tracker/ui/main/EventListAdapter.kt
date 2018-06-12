@@ -10,7 +10,7 @@ import com.laatonwalabhoot.tracker.R
 import java.util.*
 import kotlin.collections.ArrayList
 
-class EventListAdapter: RecyclerView.Adapter<EventViewHolder>(){
+class EventListAdapter : RecyclerView.Adapter<EventViewHolder>() {
 
     private var eventList: List<Event>? = ArrayList()
 

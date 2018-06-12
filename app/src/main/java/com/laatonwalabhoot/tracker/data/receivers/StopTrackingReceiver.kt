@@ -6,7 +6,7 @@ import android.content.Intent
 import android.util.Log
 import com.laatonwalabhoot.tracker.data.services.TrackerService
 
-class StopTrackingReceiver: BroadcastReceiver() {
+class StopTrackingReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context?, intent: Intent?) {
         context?.stopService(Intent(context, TrackerService::class.java))

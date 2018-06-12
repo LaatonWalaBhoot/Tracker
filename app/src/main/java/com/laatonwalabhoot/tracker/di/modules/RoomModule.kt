@@ -15,8 +15,8 @@ class RoomModule(private val applicationContext: Context) {
     @Provides
     @Singleton
     fun database(): TrackerDb {
-       trackerDb = Room.databaseBuilder(applicationContext, TrackerDb::class.java,"Tracker-DB")
-               .build()
+        trackerDb = Room.databaseBuilder(applicationContext, TrackerDb::class.java, "Tracker-DB")
+                .build()
         return trackerDb
     }
 }

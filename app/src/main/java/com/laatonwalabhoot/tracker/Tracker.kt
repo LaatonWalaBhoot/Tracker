@@ -7,7 +7,7 @@ import com.laatonwalabhoot.tracker.di.components.AppComponent
 import com.laatonwalabhoot.tracker.di.components.DaggerAppComponent
 import com.laatonwalabhoot.tracker.di.modules.RoomModule
 
-class Tracker: Application() {
+class Tracker : Application() {
 
     private lateinit var component: AppComponent
 
@@ -26,7 +26,7 @@ class Tracker: Application() {
         return activity.application as Tracker
     }
 
-    fun getApp(service: Service): Tracker{
+    fun getApp(service: Service): Tracker {
         return service.application as Tracker
     }
 

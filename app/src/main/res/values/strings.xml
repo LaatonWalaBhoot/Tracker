@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Tracker</string>
+    <string name="phone_unlock">Phone Unlocked</string>
+    <string name="screen_on">Screen On</string>
+    <string name="screen_off">Screen Off</string>
+    <string name="stop_tracking">Stop Tracking</string>
+    <string name="tracking_background">Tracking in Background</string>
+    <string name="placeholder_text">Waiting for Screen Event...</string>
 </resources>

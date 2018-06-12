@@ -20,7 +20,7 @@ import com.laatonwalabhoot.tracker.di.modules.LinearLayoutManagerModule
 import kotlinx.android.synthetic.main.fragment_main.*
 import javax.inject.Inject
 
-class MainFragment : Fragment(){
+class MainFragment : Fragment() {
 
     companion object {
         fun newInstance() = MainFragment()
@@ -50,7 +50,7 @@ class MainFragment : Fragment(){
                 .appComponent(Tracker.newInstance().getApp(activity as MainActivity).getAppComponent())
                 .build()
         component.injectMainFragment(this)
-        activity?.startService(Intent(activity,TrackerService::class.java))
+        activity?.startService(Intent(activity, TrackerService::class.java))
         setAdapter()
     }
 
@@ -59,6 +59,14 @@ class MainFragment : Fragment(){
         event_list.adapter = eventListAdapter
         databaseLiveData = trackerDb.daoAccess().fetchAllData()
         databaseLiveData.observe(this, Observer<List<Event>> {
+            when (it?.size == 0) {
+                false -> when (event_list.visibility) {
+                    View.GONE -> {
+                        event_list.visibility = View.VISIBLE
+                        empty_placeholder.visibility = View.GONE
+                    }
+                }
+            }
             eventListAdapter.setList(it!!)
         })
     }

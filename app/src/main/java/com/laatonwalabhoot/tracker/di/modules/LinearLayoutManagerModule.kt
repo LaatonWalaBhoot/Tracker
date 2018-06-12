@@ -11,7 +11,7 @@ class LinearLayoutManagerModule(private val context: Context?) {
 
     @Provides
     @PerFragmentScope
-    fun linearLayoutManager() : LinearLayoutManager {
+    fun linearLayoutManager(): LinearLayoutManager {
         return LinearLayoutManager(context)
     }
 }
