@@ -18,6 +18,7 @@
             </intent-filter>
         </activity>
         <service android:name=".data.services.TrackerService" />
+        <receiver android:name=".data.receivers.StopTrackingReceiver"/>
     </application>
 
 </manifest>

@@ -1,6 +1,6 @@
 package com.laatonwalabhoot.tracker.di.components
 
-import com.laatonwalabhoot.tracker.db.Database
+import com.laatonwalabhoot.tracker.db.TrackerDb
 import com.laatonwalabhoot.tracker.di.modules.RoomModule
 import dagger.Component
 import javax.inject.Singleton
@@ -9,5 +9,5 @@ import javax.inject.Singleton
 @Singleton
 interface AppComponent {
 
-    fun getDatabase(): Database
+    fun getDatabase(): TrackerDb
 }

@@ -8,7 +8,7 @@ import android.os.IBinder
 import com.laatonwalabhoot.tracker.Tracker
 import com.laatonwalabhoot.tracker.data.receivers.EventListener
 import com.laatonwalabhoot.tracker.data.receivers.EventReceiver
-import com.laatonwalabhoot.tracker.db.Database
+import com.laatonwalabhoot.tracker.db.TrackerDb
 import com.laatonwalabhoot.tracker.db.entity.Event
 import com.laatonwalabhoot.tracker.di.components.DaggerTrackerServiceComponent
 import com.laatonwalabhoot.tracker.di.components.TrackerServiceComponent
@@ -21,7 +21,7 @@ import javax.inject.Inject
 class TrackerService: Service(), EventListener {
 
     private lateinit var component: TrackerServiceComponent
-    private val event: Event = Event()
+    private val NOTIFICATION_ID = 1001
 
     @Inject
     lateinit var eventReceiver: EventReceiver
@@ -33,7 +33,10 @@ class TrackerService: Service(), EventListener {
     lateinit var notification: Notification
 
     @Inject
-    lateinit var database: Database
+    lateinit var trackerDb: TrackerDb
+
+    @Inject
+    lateinit var event: Event
 
 
     override fun onBind(intent: Intent?): IBinder? {
@@ -44,7 +47,7 @@ class TrackerService: Service(), EventListener {
         if(intent==null) {
             return START_NOT_STICKY
         }
-        startForeground(1001, notification)
+        startForeground(NOTIFICATION_ID, notification)
         return START_STICKY
     }
 
@@ -66,7 +69,7 @@ class TrackerService: Service(), EventListener {
         Completable.create {
             event.event = name
             event.stamp = stamp
-            database.daoAccess().insertOnlySingleRecord(event)
+            trackerDb.daoAccess().insertOnlySingleRecord(event)
             it.onComplete()
         }.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

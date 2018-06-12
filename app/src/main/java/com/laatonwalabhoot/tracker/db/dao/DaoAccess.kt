@@ -1,4 +1,4 @@
-package com.laatonwalabhoot.tracker.db.Dao
+package com.laatonwalabhoot.tracker.db.dao
 
 import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.Dao
