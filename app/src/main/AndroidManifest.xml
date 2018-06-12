@@ -18,7 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name=".data.services.TrackerService" />
+        <service android:name=".data.services.TrackerService"
+            android:process=".ServiceProcess"/>
         <receiver android:name=".data.receivers.StopTrackingReceiver"/>
     </application>
 
