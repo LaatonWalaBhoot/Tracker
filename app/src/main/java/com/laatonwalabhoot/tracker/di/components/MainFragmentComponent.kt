@@ -9,9 +9,7 @@ import com.laatonwalabhoot.tracker.ui.main.MainFragment
 import dagger.Component
 
 @Component(modules = [EventListAdapterModule::class,
-    EventReceiverModule::class,
-    IntentFilterModule::class,
-    LinearLayoutManagerModule::class])
+    LinearLayoutManagerModule::class], dependencies = [AppComponent::class])
 
 @PerFragmentScope
 interface MainFragmentComponent {

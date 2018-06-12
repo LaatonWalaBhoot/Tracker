@@ -3,7 +3,7 @@ package com.laatonwalabhoot.tracker.ui.main
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.TextView
-import com.laatonwalabhoot.tracker.data.models.Event
+import com.laatonwalabhoot.tracker.db.entity.Event
 import com.laatonwalabhoot.tracker.R
 
 class EventViewHolder(view: View) : RecyclerView.ViewHolder(view) {

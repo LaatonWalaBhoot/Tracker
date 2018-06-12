@@ -1,7 +1,7 @@
 package com.laatonwalabhoot.tracker.di.modules
 
 import android.content.IntentFilter
-import com.laatonwalabhoot.tracker.di.scopes.PerFragmentScope
+import com.laatonwalabhoot.tracker.di.scopes.ApplicationScope
 import dagger.Module
 import dagger.Provides
 
@@ -9,7 +9,7 @@ import dagger.Provides
 class IntentFilterModule {
 
     @Provides
-    @PerFragmentScope
+    @ApplicationScope
     fun intentFilter(): IntentFilter {
         return IntentFilter()
     }

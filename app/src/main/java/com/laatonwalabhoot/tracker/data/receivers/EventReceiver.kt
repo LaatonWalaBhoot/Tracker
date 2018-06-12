@@ -4,7 +4,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import com.laatonwalabhoot.tracker.utils.TimeUtils
-import com.laatonwalabhoot.tracker.data.models.Event
+import com.laatonwalabhoot.tracker.db.entity.Event
 
 class EventReceiver: BroadcastReceiver() {
 
@@ -13,16 +13,16 @@ class EventReceiver: BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
         when(intent?.action) {
             Intent.ACTION_USER_PRESENT -> {
-                eventListener.onEvent(Event("Phone Unlocked",
-                        TimeUtils.newInstance().getCurrentTime()))
+                eventListener.onEvent("Phone Unlocked",
+                        TimeUtils.newInstance().getCurrentTime())
             }
             Intent.ACTION_SCREEN_ON -> {
-                eventListener.onEvent(Event("Screen On",
-                        TimeUtils.newInstance().getCurrentTime()))
+                eventListener.onEvent("Screen On",
+                        TimeUtils.newInstance().getCurrentTime())
             }
             Intent.ACTION_SCREEN_OFF -> {
-                eventListener.onEvent(Event("Screen Off",
-                        TimeUtils.newInstance().getCurrentTime()))
+                eventListener.onEvent("Screen Off",
+                        TimeUtils.newInstance().getCurrentTime())
             }
         }
     }

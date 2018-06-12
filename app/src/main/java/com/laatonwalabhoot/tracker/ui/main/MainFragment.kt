@@ -1,5 +1,9 @@
 package com.laatonwalabhoot.tracker.ui.main
 
+import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.Observer
+import android.arch.persistence.room.Room
+import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -9,31 +13,39 @@ import android.view.View
 import android.view.ViewGroup
 import com.laatonwalabhoot.tracker.data.receivers.EventReceiver
 import com.laatonwalabhoot.tracker.R
+import com.laatonwalabhoot.tracker.Tracker
+import com.laatonwalabhoot.tracker.data.receivers.EventListener
+import com.laatonwalabhoot.tracker.data.services.TrackerService
+import com.laatonwalabhoot.tracker.db.Database
+import com.laatonwalabhoot.tracker.db.entity.Event
 import com.laatonwalabhoot.tracker.di.components.DaggerMainFragmentComponent
 import com.laatonwalabhoot.tracker.di.components.MainFragmentComponent
 import com.laatonwalabhoot.tracker.di.modules.LinearLayoutManagerModule
+import io.reactivex.Completable
+import io.reactivex.CompletableObserver
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_main.*
 import javax.inject.Inject
 
-class MainFragment : Fragment() {
+class MainFragment : Fragment(){
 
     companion object {
         fun newInstance() = MainFragment()
     }
 
     private lateinit var component: MainFragmentComponent
+    private lateinit var databaseLiveData: LiveData<List<Event>>
 
     @Inject
     lateinit var eventListAdapter: EventListAdapter
 
     @Inject
-    lateinit var eventReceiver: EventReceiver
-
-    @Inject
-    lateinit var intentFilter: IntentFilter
-
-    @Inject
     lateinit var linearLayoutManager: LinearLayoutManager
+
+    @Inject
+    lateinit var database: Database
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -44,28 +56,20 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         component = DaggerMainFragmentComponent.builder()
                 .linearLayoutManagerModule(LinearLayoutManagerModule(context))
+                .appComponent(Tracker.newInstance().getApp(activity as MainActivity).getAppComponent())
                 .build()
         component.injectMainFragment(this)
+        activity?.startService(Intent(activity,TrackerService::class.java))
         setAdapter()
-        setReceiver()
     }
 
     private fun setAdapter() {
         event_list.layoutManager = linearLayoutManager
         event_list.adapter = eventListAdapter
-    }
-
-    private fun setReceiver() {
-        eventReceiver.setEventListener(eventListAdapter.getListener())
-        intentFilter.addAction("android.intent.action.USER_PRESENT")
-        intentFilter.addAction("android.intent.action.SCREEN_ON")
-        intentFilter.addAction("android.intent.action.SCREEN_OFF")
-        activity?.registerReceiver(eventReceiver, intentFilter)
-    }
-
-    override fun onDestroy() {
-        activity?.unregisterReceiver(eventReceiver)
-        super.onDestroy()
+        databaseLiveData = database.daoAccess().fetchAllData()
+        databaseLiveData.observe(this, Observer<List<Event>> {
+            eventListAdapter.setList(it!!)
+        })
     }
 
 }
